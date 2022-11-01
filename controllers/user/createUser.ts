@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { database } from "../../database/database";
 import dotenv from "dotenv";
-import { RESPONES_ERROR_MESSAGE } from "../../utils/commonConstants";
+import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 dotenv.config();
 
 interface RequestBody {
@@ -23,19 +23,19 @@ async function createUser(req: Request, res: Response) {
       (err, data) => {
         if (err) {
           console.log({ err });
-          return;
+          return res
+            .status(400)
+            .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
         }
 
-        return res
-          .status(201)
-          .send({ message: RESPONES_ERROR_MESSAGE.SUCCESS });
+        return res.status(201).send({ message: RESPONES_MESSAGE.SUCCESS });
       }
     );
   } catch (err) {
     console.log(err);
     return res
       .status(500)
-      .send({ message: RESPONES_ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
+      .send({ message: RESPONES_MESSAGE.INTERNAL_SERVER_ERROR });
   }
 }
 

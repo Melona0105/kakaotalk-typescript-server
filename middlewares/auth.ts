@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { verifyIdToken } from "../libs/firebase";
-import { RESPONES_ERROR_MESSAGE } from "../utils/commonConstants";
+import { RESPONES_MESSAGE } from "../utils/commonConstants";
 
 /**
  * 모든 api에 대해서 토큰을 확인하는 함수입니다.
@@ -11,7 +11,7 @@ async function auth(req: Request, res: Response, next: () => void) {
   if (!token) {
     return res
       .status(400)
-      .send({ message: RESPONES_ERROR_MESSAGE.INVALID_TOKEN });
+      .send({ message: RESPONES_MESSAGE.INVALID_TOKEN });
   }
 
   // 토큰에 uid가 정상적으로 존재할경우, 다음 req로 넘겨줍니다.
@@ -22,7 +22,7 @@ async function auth(req: Request, res: Response, next: () => void) {
   } else {
     return res
       .status(401)
-      .send({ message: RESPONES_ERROR_MESSAGE.BAD_USER_INPUT });
+      .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
   }
 }
 
