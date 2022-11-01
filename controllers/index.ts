@@ -1,5 +1,5 @@
-import userInfo from "./user/userinfo";
+import createUser from "./user/createUser";
 
 export default {
-  userInfo,
+  createUser,
 };
