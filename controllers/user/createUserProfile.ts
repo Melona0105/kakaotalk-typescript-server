@@ -1,6 +1,6 @@
+import dotenv from "dotenv";
 import { Request, Response } from "express";
 import { database } from "../../database/database";
-import dotenv from "dotenv";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 dotenv.config();
 
@@ -14,7 +14,7 @@ interface RequestBody {
 /**
  * 클라이언트의 요청을 받아 데이터를 DB에 저장합니다.
  */
-async function createUser(req: Request, res: Response) {
+async function createUserProfile(req: Request, res: Response) {
   const { uid, email, username, termsIndexes }: RequestBody = req.body;
   const termsIndexesJSON = JSON.stringify(termsIndexes);
   try {
@@ -39,4 +39,4 @@ async function createUser(req: Request, res: Response) {
   }
 }
 
-export default createUser;
+export default createUserProfile;
