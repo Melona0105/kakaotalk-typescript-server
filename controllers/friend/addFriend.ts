@@ -2,15 +2,17 @@ import { Request, Response } from "express";
 import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
-/**
- * 일반 유저의 이메일과 일치하는 데이터를 쿼리합니다.
- */
-function getUserProfile(req: Request, res: Response) {
-  const { email } = req.params;
+interface RequestBody {
+  uid: string;
+  friendId: string;
+}
+
+function addFriend(req: Request, res: Response) {
+  const { uid, friendId }: RequestBody = req.body;
 
   try {
     database.query(
-      `SELECT id, email, username from users WHERE email="${email}"`,
+      `INSERT INTO friends (user_id, friend_id) VALUES ("${uid}", "${friendId}")`,
       (err, data) => {
         if (err) {
           console.log(err);
@@ -18,15 +20,17 @@ function getUserProfile(req: Request, res: Response) {
             .status(400)
             .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
         }
-        return res.status(201).send(data);
+        console.log("good");
+        return res.status(201).send({ message: RESPONES_MESSAGE.SUCCESS });
       }
     );
   } catch (err) {
     console.log(err);
+
     return res
       .status(500)
       .send({ message: RESPONES_MESSAGE.INTERNAL_SERVER_ERROR });
   }
 }
 
-export default getUserProfile;
+export default addFriend;
