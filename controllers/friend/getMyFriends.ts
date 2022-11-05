@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { MysqlError } from "mysql";
 import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
@@ -7,18 +6,16 @@ interface MyFriendFristDataType {
   friend_id: string;
 }
 
-interface MyFriendResultType {
-  [key: string]: { id: string; username: string };
-}
-
+/**
+ * 친구목록중, 차단되거나, 숨겨지지 않은 친구만 불러옵니다.
+ */
 async function getMyFriends(req: Request, res: Response) {
   const { uid } = req.body;
-  const result: any[] = [];
 
   try {
     const friendIds: MyFriendFristDataType[] = await new Promise((res, rej) => {
       database.query(
-        `SELECT friend_id FROM friends WHERE user_id="${uid}"`,
+        `SELECT friend_id FROM friends WHERE user_id="${uid}" AND is_hidden="0" AND is_blocked="0"`,
         (err, result) => {
           if (err) {
             return rej(err);

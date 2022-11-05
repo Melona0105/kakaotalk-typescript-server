@@ -20,7 +20,6 @@ function addFriend(req: Request, res: Response) {
             .status(400)
             .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
         }
-        console.log("good");
         return res.status(201).send({ message: RESPONES_MESSAGE.SUCCESS });
       }
     );
