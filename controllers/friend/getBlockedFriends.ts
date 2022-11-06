@@ -4,16 +4,16 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 /**
- * 친구목록중, 차단되거나, 숨겨지지 않은 친구만 불러옵니다.
+ * 차단 친구 목록을 쿼리합니다.
  */
-async function getMyFriends(req: Request, res: Response) {
+async function getBlockedFriends(req: Request, res: Response) {
   const { uid } = req.body;
 
   try {
     const friendIds: MyFriendFristDataType[] = await new Promise(
       (resolve, reject) => {
         database.query(
-          `SELECT friend_id FROM friends WHERE user_id="${uid}" AND is_hidden="0" AND is_blocked="0"`,
+          `SELECT friend_id FROM friends WHERE user_id="${uid}" AND is_blocked="1"`,
           (err, result) => {
             if (err) {
               console.log(err);
@@ -60,4 +60,4 @@ async function getMyFriends(req: Request, res: Response) {
   }
 }
 
-export default getMyFriends;
+export default getBlockedFriends;
