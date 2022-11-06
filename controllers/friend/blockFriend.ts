@@ -1,11 +1,8 @@
 import { Request, Response } from "express";
+import { RequestBody } from "./utils/friend.interface";
 import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
-interface RequestBody {
-  uid: string;
-  friendId: string;
-}
 
 async function blockFriend(req: Request, res: Response) {
   const { uid, friendId }: RequestBody = req.body;

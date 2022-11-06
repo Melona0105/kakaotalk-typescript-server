@@ -3,16 +3,13 @@ import { RequestBody } from "./utils/friend.interface";
 import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
-/**
- * 받은 friendId에 해당하는 유저를 숨김 상태로 변경합니다.
- */
-async function hideFriend(req: Request, res: Response) {
+async function deleteFriend(req: Request, res: Response) {
   const { uid, friendId }: RequestBody = req.body;
 
   try {
-    const result = await new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE friends SET is_hidden="${1}" WHERE user_id="${uid}" AND friend_id="${friendId}"`,
+        `DELETE FROM friends WHERE user_id="${uid}" AND friend_id="${friendId}"`,
         (err, data) => {
           if (err) {
             console.log(err);
@@ -25,8 +22,7 @@ async function hideFriend(req: Request, res: Response) {
         }
       );
     });
-
-    return res.status(201).send(result);
+    return res.status(201).send({ message: RESPONES_MESSAGE.SUCCESS });
   } catch (err) {
     console.log(err);
 
@@ -36,4 +32,4 @@ async function hideFriend(req: Request, res: Response) {
   }
 }
 
-export default hideFriend;
+export default deleteFriend;

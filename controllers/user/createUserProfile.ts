@@ -22,7 +22,7 @@ async function createUserProfile(req: Request, res: Response) {
       `INSERT INTO users (id, email, username, agree_terms) VALUES ("${uid}", "${email}", "${username}", "${termsIndexesJSON}")`,
       (err, data) => {
         if (err) {
-          console.log({ err });
+          console.log(err);
           return res
             .status(400)
             .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
