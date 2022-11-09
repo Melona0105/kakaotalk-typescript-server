@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase-admin/app";
 import { auth, credential, ServiceAccount } from "firebase-admin";
+import { initializeApp } from "firebase-admin/app";
 import serviceAccountKey from "./serviceAccountKey.json";
 
 initializeApp({

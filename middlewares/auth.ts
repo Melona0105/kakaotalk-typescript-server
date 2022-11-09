@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { verifyIdToken } from "../libs/firebase";
+import { verifyIdToken } from "../libs/firebase/firebase";
 import { RESPONES_MESSAGE } from "../utils/commonConstants";
 
 /**
