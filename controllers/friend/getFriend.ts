@@ -6,6 +6,7 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
  * 친구의 이메일과 일치하는 데이터를 리턴합니다.
  */
 function getFriend(req: Request, res: Response) {
+  console.log("getFriend");
   const { uid } = req.body;
   const { email } = req.params;
 

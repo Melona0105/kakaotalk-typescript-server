@@ -3,13 +3,14 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function getChattingRoom(req: Request, res: Response) {
+  console.log("getChattingRoom");
   const { uid } = req.body;
-  const { friendId } = req.params;
+  const { friend_id } = req.params;
   try {
     // 두 사람의 방이 있는지 확인합니다.
     const result1: any[] = await new Promise((resolve, reject) => {
       database.query(
-        `SELECT * FROM room_members as A INNER JOIN room_members as B WHERE A.user_id="${uid}" AND B.user_id="${friendId}" AND A.room_id = B.room_id`,
+        `SELECT * FROM room_members as A INNER JOIN room_members as B WHERE A.user_id="${uid}" AND B.user_id="${friend_id}" AND A.room_id = B.room_id`,
         (err, data) => {
           if (err) {
             console.log(err);
@@ -67,7 +68,7 @@ async function getChattingRoom(req: Request, res: Response) {
 
     await new Promise((resolve, reject) => {
       database.query(
-        `INSERT INTO room_members (user_id, room_id) VALUES ("${friendId}", "${newRoomId}")`,
+        `INSERT INTO room_members (user_id, room_id) VALUES ("${friend_id}", "${newRoomId}")`,
         (err, result) => {
           if (err) {
             console.log(err);

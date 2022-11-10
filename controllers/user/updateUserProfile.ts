@@ -9,6 +9,7 @@ interface RequestBody {
 }
 
 function updateUserProfile(req: Request, res: Response) {
+  console.log("updateUserProfile");
   const { uid, username, summary }: RequestBody = req.body;
 
   try {

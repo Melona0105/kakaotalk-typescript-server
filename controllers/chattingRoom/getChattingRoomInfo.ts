@@ -3,8 +3,9 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function getChattingRoomInfo(req: Request, res: Response) {
+  console.log("getChattingRoomInfo");
   const { uid } = req.body;
-  const { roomId } = req.params;
+  const { room_id } = req.params;
 
   // room member중, rommId를 갖고있고, user가 내가 아닌 경우의 userId를 획득해서 이 아이디로 데이터를 가져옵니다.
   try {
@@ -13,7 +14,7 @@ async function getChattingRoomInfo(req: Request, res: Response) {
         `SELECT U.id, U.email, U.username, U.summary FROM users AS U
              LEFT JOIN room_members AS RM ON RM.user_id = U.id
              LEFT JOIN friends AS F ON F.friend_id = U.id
-             WHERE room_id = "${roomId}" AND U.id != "${uid}"`,
+             WHERE room_id = "${room_id}" AND U.id != "${uid}"`,
         (err, data) => {
           if (err) {
             console.log(err);

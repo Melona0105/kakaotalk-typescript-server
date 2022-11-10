@@ -1,19 +1,17 @@
 import { Request, Response } from "express";
-import { RequestBody } from "./utils/friend.interface";
 import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
-/**
- * 받은 friendId에 해당하는 유저를 숨김 상태로 변경합니다.
- */
-async function hideFriend(req: Request, res: Response) {
-  console.log("hideFriend");
-  const { uid, friendId }: RequestBody = req.body;
+async function getChattings(req: Request, res: Response) {
+  console.log("getChattings");
+  const { room_id } = req.params;
 
   try {
-    const result = await new Promise((resolve, reject) => {
+    const chatData = await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE friends SET is_hidden="${1}" WHERE user_id="${uid}" AND friend_id="${friendId}"`,
+        `SELECT C.id, C.room_id, C.sender_id, C.text, C.read, C.createdAt, C.updatedAt, U.username FROM chats AS C
+         LEFT JOIN users AS U ON C.sender_id = U.id
+          WHERE C.room_id = "${room_id}"`,
         (err, data) => {
           if (err) {
             console.log(err);
@@ -27,7 +25,7 @@ async function hideFriend(req: Request, res: Response) {
       );
     });
 
-    return res.status(201).send(result);
+    return res.status(201).send(chatData);
   } catch (err) {
     console.log(err);
 
@@ -37,4 +35,4 @@ async function hideFriend(req: Request, res: Response) {
   }
 }
 
-export default hideFriend;
+export default getChattings;

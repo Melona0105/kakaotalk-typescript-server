@@ -5,7 +5,7 @@ import auth from "../middlewares/auth";
 
 const chattingRoomRouter = Router();
 
-chattingRoomRouter.get("/:friendId", auth, getChattingRoom);
-chattingRoomRouter.get("/getRoomInfo/:roomId", auth, getChattingRoomInfo);
+chattingRoomRouter.get("/get_room_info/:room_id", auth, getChattingRoomInfo);
+chattingRoomRouter.get("/:friend_id", auth, getChattingRoom);
 
 export default chattingRoomRouter;

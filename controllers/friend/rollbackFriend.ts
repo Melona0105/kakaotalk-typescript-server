@@ -4,6 +4,7 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function rollBackFriend(req: Request, res: Response) {
+  console.log("rollBackFriend");
   const { uid, friendId }: RequestBody = req.body;
 
   try {

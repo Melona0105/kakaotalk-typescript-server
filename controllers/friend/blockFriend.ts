@@ -5,6 +5,7 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 
 async function blockFriend(req: Request, res: Response) {
+  console.log("blockFriend");
   const { uid, friendId }: RequestBody = req.body;
 
   try {

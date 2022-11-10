@@ -13,7 +13,7 @@ import auth from "../middlewares/auth";
 
 const friendRouter = Router();
 
-friendRouter.get("/get/:friendId", auth, getFriendById);
+friendRouter.get("/get/:friend_id", auth, getFriendById);
 friendRouter.get("/hide", auth, getMyHiddenFriends);
 friendRouter.get("/block", auth, getBlockedFriends);
 friendRouter.get("/:email", auth, getFriend);

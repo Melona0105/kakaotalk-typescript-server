@@ -6,12 +6,13 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
  * 친구의 이메일과 일치하는 데이터를 리턴합니다.
  */
 function getFriendById(req: Request, res: Response) {
-  const { friendId } = req.params;
+  console.log("getFriendById");
+  const { friend_id } = req.params;
 
   try {
     // 주어진 이메일과 일치하는 데이터 쿼리
     database.query(
-      `SELECT id, email, username, summary from users WHERE id="${friendId}"`,
+      `SELECT id, email, username, summary from users WHERE id="${friend_id}"`,
       (err, data) => {
         if (err) {
           console.log(err);
