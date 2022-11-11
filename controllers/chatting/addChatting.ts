@@ -10,7 +10,7 @@ interface ChattingData {
 /**
  * 웹소켓을 통해 들어온 데이터를 chatting에 쿼리합니다.
  */
-async function addCahtting({ sender_id, text, room_id }: ChattingData) {
+async function addChatting({ sender_id, text, room_id }: ChattingData) {
   try {
     await new Promise((resolve, reject) => {
       database.query(
@@ -29,4 +29,4 @@ async function addCahtting({ sender_id, text, room_id }: ChattingData) {
     console.log(err);
   }
 }
-export default addCahtting;
+export default addChatting;

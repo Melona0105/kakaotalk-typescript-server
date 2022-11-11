@@ -5,12 +5,12 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function deleteFriend(req: Request, res: Response) {
   console.log("deleteFriend");
-  const { uid, friendId }: RequestBody = req.body;
+  const { uid, friend_id }: RequestBody = req.body;
 
   try {
     await new Promise((resolve, reject) => {
       database.query(
-        `DELETE FROM friends WHERE user_id="${uid}" AND friend_id="${friendId}"`,
+        `DELETE FROM friends WHERE user_id="${uid}" AND friend_id="${friend_id}"`,
         (err, data) => {
           if (err) {
             console.log(err);

@@ -28,7 +28,7 @@ async function getChattingRoom(req: Request, res: Response) {
     // 방이 존재한다면, 해당 방을 리턴합니다.
     if (userRoom) {
       console.log("exsited room");
-      return res.status(201).send({ roomId: userRoom.room_id });
+      return res.status(201).send({ room_id: userRoom.room_id });
     }
 
     // 방이 없다면, 새로 방을 만든 후, 그 방을 연결합니다.
@@ -82,7 +82,7 @@ async function getChattingRoom(req: Request, res: Response) {
       );
     });
     console.log("created room");
-    return res.status(201).send({ roomId: result2.insertId });
+    return res.status(201).send({ room_id: result2.insertId });
   } catch (err) {
     console.log(err);
 

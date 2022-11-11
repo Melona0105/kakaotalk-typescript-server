@@ -6,11 +6,11 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 function addFriend(req: Request, res: Response) {
   console.log("addFriend");
-  const { uid, friendId }: RequestBody = req.body;
+  const { uid, friend_id }: RequestBody = req.body;
 
   try {
     database.query(
-      `INSERT INTO friends (user_id, friend_id) VALUES ("${uid}", "${friendId}")`,
+      `INSERT INTO friends (user_id, friend_id) VALUES ("${uid}", "${friend_id}")`,
       (err, data) => {
         if (err) {
           console.log(err);

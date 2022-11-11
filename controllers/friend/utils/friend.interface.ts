@@ -1,6 +1,6 @@
 export interface RequestBody {
   uid: string;
-  friendId: string;
+  friend_id: string;
 }
 
 export interface MyFriendFristDataType {

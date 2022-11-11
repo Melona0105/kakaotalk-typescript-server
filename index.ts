@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import app from "./app";
-import addCahtting from "./controllers/chatting/addCahtting";
+import addChatting from "./controllers/chatting/addChatting";
 
 dotenv.config();
 
@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
   });
   socket.on("message", async (data) => {
     console.log(data);
-    await addCahtting(data);
+    await addChatting(data);
     // 메세지 쿼리 후에 응답을 돌려줍니다.
     socket.emit("message_send");
   });

@@ -5,12 +5,12 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function rollBackFriend(req: Request, res: Response) {
   console.log("rollBackFriend");
-  const { uid, friendId }: RequestBody = req.body;
+  const { uid, friend_id }: RequestBody = req.body;
 
   try {
     const result = await new Promise((resolve, reject) => {
       database.query(
-        `UPDATE friends SET is_hidden="${0}", is_blocked="${0}" WHERE user_id="${uid}" AND friend_id="${friendId}"`,
+        `UPDATE friends SET is_hidden="${0}", is_blocked="${0}" WHERE user_id="${uid}" AND friend_id="${friend_id}"`,
         (err, data) => {
           if (err) {
             console.log(err);

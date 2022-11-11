@@ -6,8 +6,8 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 /**
  * 차단 친구 목록을 쿼리합니다.
  */
-async function getBlockedFriends(req: Request, res: Response) {
-  console.log("getBlockedFriends");
+async function getMyBlockedFriends(req: Request, res: Response) {
+  console.log("getMyBlockedFriends");
   const { uid } = req.body;
 
   try {
@@ -61,4 +61,4 @@ async function getBlockedFriends(req: Request, res: Response) {
   }
 }
 
-export default getBlockedFriends;
+export default getMyBlockedFriends;
