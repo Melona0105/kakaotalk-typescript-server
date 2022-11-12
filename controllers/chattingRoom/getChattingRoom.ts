@@ -25,9 +25,28 @@ async function getChattingRoom(req: Request, res: Response) {
     });
 
     const userRoom = result1[0];
-    // 방이 존재한다면, 해당 방을 리턴합니다.
+    // 방이 존재한다면, 해당 방의 상태를 활성화 후 리턴합니다.
     if (userRoom) {
-      console.log("exsited room");
+      const a = await new Promise((resolve, reject) => {
+        database.query(
+          `UPDATE room_members AS RM SET is_leaved = "${0}"
+          WHERE RM.room_id = "${userRoom.room_id}"`,
+          (err, data) => {
+            if (err) {
+              console.log(err);
+              return reject(
+                res
+                  .status(400)
+                  .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT })
+              );
+            }
+
+            return resolve(data);
+          }
+        );
+      });
+      console.log(a);
+
       return res.status(201).send({ room_id: userRoom.room_id });
     }
 

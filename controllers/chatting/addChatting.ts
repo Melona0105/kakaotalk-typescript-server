@@ -1,4 +1,3 @@
-import { io } from "../..";
 import { database } from "../../database/database";
 
 interface ChattingData {

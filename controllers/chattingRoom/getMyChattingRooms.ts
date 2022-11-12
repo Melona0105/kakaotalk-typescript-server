@@ -12,8 +12,8 @@ async function getMyChattingRooms(req: Request, res: Response) {
   try {
     const myRoomIds: MyRoomIdsType[] = await new Promise((resolve, reject) => {
       database.query(
-        `SELECT RM.room_id FROM room_members AS RM WHERE RM.user_id
-        ="${uid}"`,
+        `SELECT RM.room_id FROM room_members AS RM
+        WHERE RM.user_id = "${uid}" AND RM.is_leaved != "${1}"`,
         (err, data) => {
           if (err) {
             console.log(err);
