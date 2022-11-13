@@ -9,7 +9,7 @@ async function getChattings(req: Request, res: Response) {
   try {
     const chatData = await new Promise((resolve, reject) => {
       database.query(
-        `SELECT C.id, C.room_id, C.sender_id, C.text, C.read, C.createdAt, C.updatedAt, U.username FROM chats AS C
+        `SELECT C.id, C.room_id AS roomId, C.sender_id AS senderId, C.text, C.read, C.createdAt, C.updatedAt, U.username FROM chats AS C
          LEFT JOIN users AS U ON C.sender_id = U.id
           WHERE C.room_id = "${room_id}"`,
         (err, data) => {

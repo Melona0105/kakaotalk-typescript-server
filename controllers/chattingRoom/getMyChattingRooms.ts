@@ -37,7 +37,7 @@ async function getMyChattingRooms(req: Request, res: Response) {
       ({ room_id }) =>
         new Promise((resolve, reject) => {
           database.query(
-            `SELECT RM.user_id, U.username, RM.room_id, C.text, C.createdAt FROM users AS U
+            `SELECT C.id, RM.user_id AS senderId, U.username, RM.room_id AS roomId, C.text, C.createdAt FROM users AS U
             LEFT JOIN room_members AS RM ON RM.user_id = U.id
             LEFT JOIN chats AS C ON C.room_id = RM.room_id
             WHERE U.id != "${uid}" AND RM.room_id = "${room_id}" LIMIT 1 `,
@@ -58,7 +58,7 @@ async function getMyChattingRooms(req: Request, res: Response) {
     );
 
     const result = await Promise.all(roomDataPromise);
-
+    console.log({ result });
     return res.status(201).send(result);
   } catch (err) {
     console.log(err);
