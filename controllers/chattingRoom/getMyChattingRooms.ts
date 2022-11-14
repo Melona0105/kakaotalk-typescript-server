@@ -40,7 +40,7 @@ async function getMyChattingRooms(req: Request, res: Response) {
             `SELECT C.id, RM.user_id AS senderId, U.username, RM.room_id AS roomId, C.text, C.createdAt FROM users AS U
             LEFT JOIN room_members AS RM ON RM.user_id = U.id
             LEFT JOIN chats AS C ON C.room_id = RM.room_id
-            WHERE U.id != "${uid}" AND RM.room_id = "${room_id}" LIMIT 1 `,
+            WHERE U.id != "${uid}" AND RM.room_id = "${room_id}" AND C.text IS NOT NULL LIMIT 1 `,
             (err, data) => {
               if (err) {
                 console.log(err);
