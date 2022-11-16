@@ -15,7 +15,6 @@ interface RequestBody {
  * 클라이언트의 요청을 받아 데이터를 DB에 저장합니다.
  */
 async function createUserProfile(req: Request, res: Response) {
-  console.log("createUserProfile");
   const { uid, email, username, termsIndexes }: RequestBody = req.body;
   const termsIndexesJSON = JSON.stringify(termsIndexes);
   try {

@@ -23,10 +23,10 @@ io.on("connection", (socket) => {
     console.log("disconnected");
   });
   socket.on("message", async (data) => {
-    console.log(data);
     await addChatting(data);
     // 메세지 쿼리 후에 응답을 돌려줍니다.
     socket.emit("message_send");
+    console.log("message send");
   });
 });
 

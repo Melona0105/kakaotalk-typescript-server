@@ -7,7 +7,6 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
  * 받은 friendId에 해당하는 유저를 숨김 상태로 변경합니다.
  */
 async function hideFriend(req: Request, res: Response) {
-  console.log("hideFriend");
   const { uid, friend_id }: RequestBody = req.body;
 
   try {

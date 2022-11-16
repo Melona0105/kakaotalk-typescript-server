@@ -3,7 +3,6 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function getChattings(req: Request, res: Response) {
-  console.log("getChattings");
   const { room_id } = req.params;
 
   try {
@@ -24,7 +23,6 @@ async function getChattings(req: Request, res: Response) {
         }
       );
     });
-
     return res.status(201).send(chatData);
   } catch (err) {
     console.log(err);

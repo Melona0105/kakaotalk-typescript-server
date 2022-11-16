@@ -7,7 +7,6 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
  * 친구목록중, 차단되거나, 숨겨지지 않은 친구만 불러옵니다.
  */
 async function getMyFriends(req: Request, res: Response) {
-  console.log("getMyFriends");
   const { uid } = req.body;
 
   try {

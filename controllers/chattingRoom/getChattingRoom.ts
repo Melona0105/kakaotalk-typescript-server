@@ -3,7 +3,6 @@ import { database } from "../../database/database";
 import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 async function getChattingRoom(req: Request, res: Response) {
-  console.log("getChattingRoom");
   const { uid } = req.body;
   const { friend_id } = req.params;
   try {

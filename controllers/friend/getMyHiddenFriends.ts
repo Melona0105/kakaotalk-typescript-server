@@ -7,7 +7,6 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
  * 숨김 친구 목록을 쿼리합니다.
  */
 async function getMyHiddenFriends(req: Request, res: Response) {
-  console.log("getMyHiddenFriends");
   const { uid } = req.body;
 
   try {

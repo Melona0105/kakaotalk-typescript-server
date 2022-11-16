@@ -5,7 +5,6 @@ import { RESPONES_MESSAGE } from "../../utils/commonConstants";
 
 
 function addFriend(req: Request, res: Response) {
-  console.log("addFriend");
   const { uid, friend_id }: RequestBody = req.body;
 
   try {

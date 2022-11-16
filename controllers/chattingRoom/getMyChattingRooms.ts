@@ -37,10 +37,10 @@ async function getMyChattingRooms(req: Request, res: Response) {
       ({ room_id }) =>
         new Promise((resolve, reject) => {
           database.query(
-            `SELECT C.id, RM.user_id AS senderId, U.username, RM.room_id AS roomId, C.text, C.createdAt FROM users AS U
-            LEFT JOIN room_members AS RM ON RM.user_id = U.id
-            LEFT JOIN chats AS C ON C.room_id = RM.room_id
-            WHERE U.id != "${uid}" AND RM.room_id = "${room_id}" AND C.text IS NOT NULL LIMIT 1 `,
+            `SELECT C.id, C.room_id AS roomId, U.id AS senderId, C.text, C.read, C.createdAt, C.updatedAt, U.username FROM chats AS C
+             LEFT JOIN room_members AS RM ON RM.room_id = C.room_id AND RM.user_id != "${uid}"
+             LEFT JOIN users AS U ON RM.user_id = U.id
+              WHERE C.room_id = "${room_id}"`,
             (err, data) => {
               if (err) {
                 console.log(err);
@@ -50,15 +50,14 @@ async function getMyChattingRooms(req: Request, res: Response) {
                     .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT })
                 );
               }
-
-              return resolve(data[0]);
+              return resolve(data[data?.length - 1]);
             }
           );
         })
     );
 
     const result = await Promise.all(roomDataPromise);
-    console.log({ result });
+
     return res.status(201).send(result);
   } catch (err) {
     console.log(err);

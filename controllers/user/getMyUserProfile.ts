@@ -10,7 +10,6 @@ interface RequestBody {
  * firebase token의 uid와 일치하는 user data를 쿼리합니다.
  */
 function getMyUserProfile(req: Request, res: Response) {
-  console.log("getMyUserProfile");
   const { uid }: RequestBody = req.body;
 
   try {
@@ -21,6 +20,7 @@ function getMyUserProfile(req: Request, res: Response) {
           .status(400)
           .send({ message: RESPONES_MESSAGE.BAD_USER_INPUT });
       }
+
       return res.status(201).send(data);
     });
   } catch (err) {
