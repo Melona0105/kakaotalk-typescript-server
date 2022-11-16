@@ -18,15 +18,14 @@ export const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  // console.log({ socketId: socket.id });
+  console.log({ socketId: socket.id });
   socket.on("disconnecet", () => {
     console.log("disconnected");
   });
   socket.on("message", async (data) => {
     await addChatting(data);
     // 메세지 쿼리 후에 응답을 돌려줍니다.
-    socket.emit("message_send");
-    console.log("message send");
+    io.emit("message_send");
   });
 });
 
